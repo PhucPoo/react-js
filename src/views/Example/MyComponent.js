@@ -3,37 +3,58 @@ import React from "react";
 class MyComponent extends React.Component {
 
     state = {
-        name: "Phuc",
-        channel: "PhucPoo",
+        firstName: '',
+        lastName: ''
     }
-    handleOnchange = (event) => {
+    handleChangeFirstName = (event) => {
         this.setState({
-            name: event.target.value
+            firstName: event.target.value,
         });
     }
+    handleChangeLastName = (event) => {
+        this.setState({
+            lastName: event.target.value,
+        });
+    }
+    handleOnClickSubmit = (event) => {
+       event.preventDefault(); // Prevent the default form submission
+        console.log(">>> check state", this.state);
+        }
+
     /*
 
     JSX
 
     */
-    render() {
-        let name = "PhucPoo";
 
+    render() {
+        console.log(">>> call render", this.state);
         return (
-            <React.Fragment>
-                <div className="MyComponent">
+            <>
+                <form>
+                    <label htmlFor="fname">First name:</label><br />
                     <input
                         type="text"
-                        value={this.state.name}
-                        onChange={(event) => this.handleOnchange(event)}
-                        ></input>
-                    Hello, {this.state.name} 
-                </div>
-                <div>
-                    My youtube channel: {this.state.channel}
-                </div>
-            </React.Fragment>
+                        value={this.state.firstName}
+                        onChange={(event) => this.handleChangeFirstName(event)}
+                    />
+                    <br />
+                    <label htmlFor="lname">Last name:</label><br />
+                    <input
+                        type="text"
+                        value={this.state.lastName}
+                        onChange={(event) => this.handleChangeLastName(event)}
+                    />
+                    <br />
+                    <input
+                        type="submit"
+                        value="Submit"
+                        onClick={(event) => this.handleOnClickSubmit(event)} 
+                    />
+                </form>
+            </>
         );
     }
 }
+
 export default MyComponent;
